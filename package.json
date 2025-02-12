@@ -13,5 +13,6 @@
     "cheerio": "^1.0.0",
     "dasu": "^0.4.3",
     "jsonpath-plus": "^10.2.0"
-  }
+  },
+  "version": "0.0.1"
 }
