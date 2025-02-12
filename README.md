@@ -2,6 +2,10 @@
 
 `yt-lib` is a free-to-use Node.js library that provides functionalities for searching and downloading YouTube videos. It simplifies the process of integrating YouTube search and download features into your applications.
 
+## Author
+
+This library is developed & maintained by [ppegu](https://github.com/ppegu).
+
 ## Inspired From
 
 This project is inspired by `yt-search` library and ytdl-core
@@ -40,10 +44,6 @@ searchVideos();
 ```
 
 This example demonstrates how to use the `YoutubeSearch` class to search for YouTube videos. Make sure to install the necessary dependencies and import the `YoutubeSearch` class from the `yt-lib` module.
-
-## Author
-
-This library is developed & maintained by [ppegu](https://github.com/ppegu).
 
 ## Contributing
 
