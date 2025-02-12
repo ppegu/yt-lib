@@ -1,7 +1,12 @@
-import type { AxiosRequestHeaders } from "axios";
+/**
+ * @module yt-lib
+ * @description Constants for the library
+ * @author Pran pegu
+ * @email pranpegu997@gmail.com
+ */
 
 export const YOUTUBE_URLS = {
-  HOME_PAGE: "https://www.youtube.com/",
+  HOME_PAGE: "https://www.youtube.com",
   SEARCH_QUERY_MOBILE: "https://m.youtube.com/results?search_query=",
   SEARCH_QUERY_DESKTOP: "https://www.youtube.com/results?search_query=",
 };
@@ -13,3 +18,11 @@ export const DEFAULT_HEADERS = {
   "accept-encoding": "gzip",
   accept: "text/html",
 };
+
+export const YOUTUBE_ITEM_TYPES = {
+  VIDEO: "video",
+  PLAYLIST: "playlist",
+  CHANNEL: "channel",
+  SHORT: "short",
+  UNKNOWN: "unknown",
+} as const;

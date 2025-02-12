@@ -1,1 +1,3 @@
-console.log("Hello via Bun!");
+import YoutubeSearch from "./modules/youtube-search";
+
+export { YoutubeSearch };

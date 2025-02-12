@@ -1,4 +1,13 @@
 /**
+ * @module yt-lib
+ * @description Logger class to log messages with different levels.
+ * @author Pran pegu
+ * @email pranpegu997@gmail.com
+ */
+
+//TODO: disable console logs in production
+
+/**
  * Logger class to log messages with different levels.
  */
 class Logger {

@@ -1,19 +1,29 @@
+/**
+ * @module yt-lib/youtube-search
+ * @description This module provides a class to search for videos on YouTube.
+ * @author Pran pegu
+ * @email pranpegu997@gmail.com
+ */
+
 import * as cheerio from "cheerio";
+import { JSONPath } from "jsonpath-plus";
 import url from "url";
 import { DEFAULT_HEADERS, YOUTUBE_URLS } from "../../constants";
 import Logger from "../../utils/Logger";
 import { requestUsingDasu } from "../../utils/request.util";
-import type { YoutubeSearchOptions } from "./types";
-import { JSONPath } from "jsonpath-plus";
-import fs from "fs";
-import path from "path";
+import { parseSearchResultItem } from "./parseSearchResultItem";
+import type {
+  YoutubeItemType,
+  YoutubeSearchOptions,
+  YoutubeSearchResult,
+} from "./types";
 
 const logger = Logger.createLogger("YoutubeSearch");
 
 const defaultSearchOptions: YoutubeSearchOptions = {
   query: "",
   limit: 20,
-  type: "video",
+  type: "short",
   device: "desktop",
 };
 
@@ -63,19 +73,20 @@ export default class YoutubeSearch {
     }
   }
 
-  private static _parseSearchResults(htmlText: string) {
+  private static _parseSearchResults(htmlText: string, type?: YoutubeItemType) {
     logger.info("Parsing search results...");
-    const initialData = this._parseSearchInitialData(htmlText);
+    const initialDataJson = this._parseSearchInitialData(htmlText);
 
+    // TODO: items exists duplicate items. need to find a way to filter or only get unique items
     const items = [
-      JSONPath({
-        json: initialData,
+      ...JSONPath({
+        json: initialDataJson,
         path: "$..itemSectionRenderer..contents.*",
         resultType: "value",
       }),
       // support newer richGridRenderer html structure
       ...JSONPath({
-        json: initialData,
+        json: initialDataJson,
         path: "$..primaryContents..contents.*",
         resultType: "value",
       }),
@@ -83,13 +94,35 @@ export default class YoutubeSearch {
 
     logger.info("items.length:", items.length);
 
+    const results: YoutubeSearchResult[] = [];
+
+    const errors: any[] = [];
+
     for (const item of items) {
-      fs.writeFileSync(
-        path.join(__dirname, "searchResults.json"),
-        JSON.stringify(item, null, 2)
-      );
-      break;
+      try {
+        const parsedResult = parseSearchResultItem(item, type);
+        if (Array.isArray(parsedResult)) {
+          parsedResult.forEach((result) => {
+            if (
+              !results.some((existingResult) => existingResult.id === result.id)
+            ) {
+              results.push(result);
+            }
+          });
+        } else if (
+          parsedResult &&
+          !results.some(
+            (existingResult) => existingResult.id === parsedResult.id
+          )
+        ) {
+          results.push(parsedResult);
+        }
+      } catch (error) {
+        errors.push(error);
+      }
     }
+
+    return { results, errors };
   }
 
   static async search(options: YoutubeSearchOptions = defaultSearchOptions) {
@@ -114,15 +147,11 @@ export default class YoutubeSearch {
     }
     searchUrl = parsedUrl.href;
 
-    // const { status, data: html } = await axios({
-    //   method: "GET",
-    //   url: searchUrl,
-    //   headers,
-    // });
-
     const htmlText = await requestUsingDasu({ ...parsedUrl, headers });
 
-    const searchResults = this._parseSearchResults(htmlText);
+    const searchResults = this._parseSearchResults(htmlText, options.type);
+
+    return searchResults;
   }
 }
 
@@ -138,9 +167,10 @@ export default class YoutubeSearch {
  */
 
 async function __tests__() {
-  await YoutubeSearch.search({
+  const { results } = await YoutubeSearch.search({
     query: "funny video shorts",
+    type: "short",
   });
-}
 
-__tests__();
+  console.log(results[1]);
+}

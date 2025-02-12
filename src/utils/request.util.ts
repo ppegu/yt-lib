@@ -1,5 +1,13 @@
+/**
+ * @module yt-lib
+ * @description This module contains utility functions for making http requests
+ * @author Pran pegu
+ * @email pranpegu997@gmail.com
+ */
+
 //@ts-ignore
 import dasu from "dasu";
+//TODO: add dasu d.ts file
 
 export function requestUsingDasu(params: any): Promise<string> {
   return new Promise((resolve, reject) => {
