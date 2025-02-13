@@ -15,8 +15,7 @@
     "build:umd": "tsc --outDir dist/umd --module umd",
     "build:types": "tsc --emitDeclarationOnly",
     "build": "npm run build:types && npm run build:cjs && npm run build:esm && npm run build:umd",
-    "prepublish": "npm run build",
-    "publish": "npm publish"
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@types/bun": "latest"
