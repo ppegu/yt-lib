@@ -47,7 +47,8 @@
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
     "dasu": "^0.4.3",
-    "jsonpath-plus": "^10.2.0"
+    "jsonpath-plus": "^10.2.0",
+    "yt-lib": "^0.0.42"
   },
   "version": "0.0.42",
   "description": "`yt-lib` is a free-to-use Node.js library that provides functionalities for searching and downloading YouTube videos. It simplifies the process of integrating YouTube search and download features into your applications."
