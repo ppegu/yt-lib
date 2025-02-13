@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/yt-lib.git"
+    "url": "git+https://github.com/your-username/yt-lib.git"
   },
   "bugs": {
     "url": "https://github.com/your-username/yt-lib/issues"
@@ -49,5 +49,6 @@
     "dasu": "^0.4.3",
     "jsonpath-plus": "^10.2.0"
   },
-  "version": "0.0.42"
+  "version": "0.0.42",
+  "description": "`yt-lib` is a free-to-use Node.js library that provides functionalities for searching and downloading YouTube videos. It simplifies the process of integrating YouTube search and download features into your applications."
 }
