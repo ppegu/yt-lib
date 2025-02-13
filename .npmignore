@@ -1,0 +1,9 @@
+src/
+node_modules/
+*.log
+*.md
+.npmignore
+tsconfig.json
+.eslintrc.js
+.prettierrc
+.gitignore

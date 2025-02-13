@@ -1,7 +1,23 @@
 {
   "name": "yt-lib",
-  "module": "src/index.ts",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
+  "scripts": {
+    "build:cjs": "tsc --outDir dist/cjs --module commonjs",
+    "build:esm": "tsc --outDir dist/esm --module esnext",
+    "build:umd": "tsc --outDir dist/umd --module umd",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build": "npm run build:types && npm run build:cjs && npm run build:esm && npm run build:umd",
+    "prepublish": "npm run build",
+    "publish": "npm publish"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
