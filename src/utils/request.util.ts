@@ -6,8 +6,8 @@
  */
 
 //@ts-ignore
-import dasu from "dasu";
-//TODO: add dasu d.ts file
+import dasu from "dasu"; //TODO: add dasu d.ts file
+import Miniget from "miniget";
 
 export function requestUsingDasu(params: any): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -24,3 +24,12 @@ export function requestUsingDasu(params: any): Promise<string> {
     });
   });
 }
+
+export async function requestUsingMiniget(
+  url: string,
+  options: Miniget.Options
+): Promise<string> {
+  return (await Miniget(url, options)).text();
+}
+
+// export async function pipeline(args: any, validate: ()=> {}, retryOptions ){}

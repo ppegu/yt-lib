@@ -9,6 +9,10 @@ export const YOUTUBE_URLS = {
   HOME_PAGE: "https://www.youtube.com",
   SEARCH_QUERY_MOBILE: "https://m.youtube.com/results?search_query=",
   SEARCH_QUERY_DESKTOP: "https://www.youtube.com/results?search_query=",
+  VIDEO_INFO: "https://www.youtube.com/get_video_info",
+  VIDEO_INFO_EURL: "https://youtube.googleapis.com/v/",
+  WATCH_PAGE: "https://www.youtube.com/watch",
+  EMBED_PAGE: "https://www.youtube.com/embed/",
 };
 
 export const DEFAULT_HEADERS = {

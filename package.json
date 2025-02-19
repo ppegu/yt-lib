@@ -48,6 +48,7 @@
     "cheerio": "^1.0.0",
     "dasu": "^0.4.3",
     "jsonpath-plus": "^10.2.0",
+    "miniget": "^4.2.3",
     "yt-lib": "^0.0.42"
   },
   "version": "0.0.42",
